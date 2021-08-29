@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Question No. 6</title>
+    <style>
+      .error
+      {
+        color: red;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Registration Form</h1>
+    <form name="Form" action="" onsubmit="return validateForm()" method="post">
+      <small class="error">* required field</small><br>
+      <br>Username* <br>
+      <input type="text" name="username" value="" placeholder="Username">
+      <small><span class="error" id="usernameErr"></span></small>
+      <br> Email* <br>
+      <input type="text" name="email" value="" placeholder="abc@xyz.com">
+      <small><span class="error" id="emailErr"></span></small>
+
+      <br>Password* <br>
+      <input type="password" name="password" value="" placeholder="Password">
+      <small><span class="error" id="passErr"></span></small>
+      <br>Confirm Password* <br>
+      <input type="password" name="re-password" value="" placeholder="Confirm">
+      <small><span class="error" id="rePassErr"></span></small>
+
+      <br>Country* <br>
+      <select class="" name="country">
+        <option value="">Select</option>
+        <option value="Bangladesh">Bangladesh</option>
+        <option value="Australia">Australia</option>
+        <option value="Russia">Russia</option>
+        <option value="Pakistan">Pakistan</option>
+      </select>
+      <small><span class="error" id="countryErr"></span></small>
+
+      <br>City* <br>
+      <select class="" name="city">
+        <option value="">Select</option>
+        <option value="Dhaka">Dhaka</option>
+        <option value="Canberra">Canberra</option>
+        <option value="Moscow">Moscow</option>
+        <option value="Islamabad">Islamabad</option>
+      </select>
+      <small><span class="error" id="cityErr"></span></small>
+
+      <br>Address* <br>
+      <textarea name="address" rows="5" cols="40"></textarea>
+      <small><span class="error" id="addressErr"></span></small>
+      <br>Mobile* <br>
+      <input type="text" name="phone" value="" placeholder="01XXXXXXXXX">
+      <small><span class="error" id="phoneErr"></span></small>
+
+      <br>Gender* <br>
+      <input type="radio" name="gender" value="Male">Male
+      <input type="radio" name="gender" value="Female">Female
+      <input type="radio" name="gender" value="Other">Custom
+      <small><span class="error" id="genderErr"></span></small>
+
+      <br><input type="checkbox" id="checkbox" value="">I accept the terms & conditions
+      <small><span class="error" id="checkboxErr"></span></small>
+
+      <br><input type="submit" name="signup" value="Submit">
+    </form>
+
+    <script>
+      function validateForm()
+      {
+        var name = document.forms["Form"]["username"].value;
+        if (name == "")
+        {
+          document.getElementById("usernameErr").innerHTML = ("Please Enter Username");
+          return false;
+        }
+
+        var email = document.forms["Form"]["email"].value;
+        var sign = dot = false;
+        if (email == "")
+        {
+          document.getElementById("emailErr").innerHTML = ("Please Enter Email Address");
+          return false;
+        }
+        else
+        {
+          for (var i=0; i<email.length; i++)
+          {
+            if (email[i] == '@')
+              sign = true;
+            if (sign && email[i] == '.')
+              dot = true;
+          }
+          if (!sign || !dot)
+          {
+            document.getElementById("emailErr").innerHTML = ("Please Enter Valid Email Address");
+            return false;
+          }
+        }
+
+        var pass = document.forms["Form"]["password"].value;
+        var passConfirm = document.forms["Form"]["re-password"].value;
+        var upper = lower = special = number = 0;
+        var passMessage = "";
+        if (pass == "")
+        {
+          document.getElementById("passErr").innerHTML = ("Please Enter Password");
+          return false;
+        }
+        else if (passConfirm == "")
+        {
+          document.getElementById("rePassErr").innerHTML = ("Please Enter Confirm Password");
+          return false;
+        }
+        else if (pass != passConfirm)
+        {
+          document.getElementById("rePassErr").innerHTML = ("Password not matched");
+          return false;
+        }
+        else
+        {
+          for (var i=0; i<pass.length; i++)
+          {
+            if (pass[i] >= 'A' && pass[i] <= 'Z')
+              upper++;
+            else if (pass[i] >= 'a' && pass[i] <= 'z')
+                lower++;
+            else if (pass[i] >= '0' && pass[i] <= '9')
+                number++;
+            else
+                special++;
+          }
+          if (upper == 0 || lower == 0 || number == 0 || special == 0)
+          {
+            passMessage = "Password Must Contain An Uppercase, A Lowercase, A Number, A Special Character";
+            document.getElementById("rePassErr").innerHTML = passMessage;
+            return false;
+          }
+        }
+
+        var country = document.forms["Form"]["country"].value;
+        if (country == "")
+        {
+          document.getElementById("countryErr").innerHTML = ("Please Select Country");
+          return false;
+        }
+
+        var city = document.forms["Form"]["city"].value;
+        if (city == "")
+        {
+          document.getElementById("cityErr").innerHTML = ("Please Select City");
+          return false;
+        }
+
+        var address = document.forms["Form"]["address"].value;
+        if (address == "")
+        {
+          document.getElementById("addressErr").innerHTML = ("Please Enter Address");
+          return false;
+        }
+
+        var phone = document.forms["Form"]["phone"].value;
+        if (phone == "")
+        {
+          document.getElementById("phoneErr").innerHTML = ("Please Enter Mobile No");
+          return false;
+        }
+
+        var gender = document.forms["Form"]["gender"].value;
+        if (gender == "")
+        {
+          document.getElementById("genderErr").innerHTML = ("<br>" + "Please Choose Gender");
+          return false;
+        }
+
+        var checkbox = document.getElementById("checkbox");
+        if (checkbox.checked == false)
+        {
+          document.getElementById("checkboxErr").innerHTML = ("Please Accept the Terms & Conditions");
+          return false;
+        }
+      }
+    </script>
+  </body>
+</html>
